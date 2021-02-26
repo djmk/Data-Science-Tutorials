@@ -1,0 +1,197 @@
+MySQL Database
+
+#Show all the databases
+--> show databases;
+
+# To select, change or use a database
+--> use Database_name;
+
+# To create a database
+--> create database database_name
+
+# to clear the page
+--> system clear
+
+# to list out all the tables inside a database
+--> show tables
+
+# Creating a new table
+--> create table table-name(
+    column_name1 datatype1,
+    column_name2 datatype2,
+    column_name3 datatype3,
+    column_name4 datatype4,
+    );
+
+# To see if the table is created as per the requirements
+--> describe table_name;
+
+Example---- create table Faculty(Faculty_ID int Primary key, Name varchar(100), Course varchar(100) Not NULL, Salary int default 10000);
+
+
+# Insert data in the table
+--> insert into table-name values(data1,data2,..);
+
+Example --- insert into Student values(101, "Deepak", 20);
+
+
+#other way of inserting in the table
+--> insert INTO table_name(column1, column2, column3,..)
+    VALUES (value1, value2, value3, ..);
+    
+Example --- insert into Student (id, name) values(103, "Nikhil");
+Example --- insert into Student (name, id) values("Aman", 105);
+
+# to see all the data in the table
+---> select * from table_name;
+
+
+# Alter - Add column
+
+# Add one column to an existing table
+---> alter table table_name add(column_name datatype);
+
+Example --- alter table Student add(Address varchar(100));
+
+# Add multiple columns
+---> alter table table_name add(column_name1 datatype1, column_name2 datatype2,
+     column_name3 datatype3);
+     
+Example --- alter table Student add(Email_ID varchar(100), ContactNo varchar(100));
+     
+# Add column with default value
+---> alter table table_name add(column_name1 datatype1 default data);
+
+Example --- alter table Student add(Test int default 100);
+
+
+
+
+# Alter - Modify column
+
+# Change data type of an existing column
+---> alter table table_name modify column_name datatype;
+
+Example --- alter table Student modify ContactNo int;
+
+# Rename column
+---> alter table table_name change old_column_name new_column_name datatype;
+
+Example --- alter table Student change Address Location varchar(100);
+
+
+# Delete column
+---> alter table table_name drop column column_name;
+
+Example --- alter table Student drop column Test;
+
+
+---> alter table table_name drop column column_name1, drop column_name2, ...;
+
+Example --- alter table Student drop column Email_ID, drop column ContactNo;
+
+
+# Select Statement
+
+Different Variations
+1. Select *
+
+Example --- select * from Student;
+
+2. Select one column
+
+Example --- select Name from Student;
+
+3. Select multiple columns
+
+Example --- select Name, ID from Student;
+
+
+# Load data from file
+---> source 'file_name.sql'
+
+Example --- source Desktop/mysqlsampledatabase.sql;
+
+
+
+Restrict result set
+
+1. Limit
+
+Example --- select * from payments limit 20;
+
+
+2. Distinct
+
+Example --- select distinct customerNumber from payments;
+
+
+
+# where clause to filter the results
+
+Example --- select * from orders where status = 'In Process';
+
+Example --- select * from orders where orderNumber > 10420;
+
+Example --- select * from orders where orderNumber > 10420 and orderNumber < 10424;
+
+Example --- select * from orders where orderDate >= '2005-05-01' and orderDate <= '2005-05-15';
+
+Example --- select * from orders where comments is Null ;
+
+Example --- select * from orders where comments is not Null ;
+
+Example --- select * from orders where comments is Null limit 10 ;
+
+Bad Example --- select * from orders where comments = NULL ; # one should not use =
+
+
+# Aggregate Functions
+
+    COUNT
+        - count(*)                            (count null values too)
+Example --- select count(*) from orders;
+        - count(column_name)                  (ignore null values)
+Example --- select count(comments) from orders;
+        - count(distinct column_name)         (ignore null values)
+Example --- select count(distinct status) from orders;
+
+    AVG
+Example --- select avg(amount) from payments;
+Example --- select avg(amount) from payments where amount > 20000;
+    MAX
+Example --- select max(amount) from payments;
+    MIN
+Example --- select min(amount) from payments;
+    SUM
+Example --- select sum(amount) from payments;
+
+
+# Update and Delete
+
+Update row of a table
+    - UPDATE table_name set column_name = 'column_value';
+Example --- update faculty set Salary = 50000;
+    - UPDATE table-name set column_name = 'column_value' where condition;
+Example --- update faculty set Salary = 10000 where Faculty_ID = 101;
+
+  
+Delete 
+    - DELETE from table_name where condition;
+Example --- delete from faculty;                  (whole table is deleted)
+Example --- delete from faculty where salary = 1000; (particular set of rows are deleted based on the conditions)
+    
+Truncate 
+    - TRUNCATE table_name
+Example --- truncate faculty;
+    
+Drop
+    - DROP table table_name
+Example --- drop table faculty;
+Example --- drop database School;
+
+
+
+
+
+
